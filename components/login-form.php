@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_unset(); 
 
 require_once './inc/functions.php';
 
@@ -19,11 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   
       $member = $controllers->members()->login_member($email['value'], $password['value']);
 
-      if (!$member) {
+    if (!$member) {
         $message = "User details are incorrect.";
+        $_SESSION['loggedIn'] = false;
+        $_SESSION['user'] = null;
      } else {
-         $_SESSION['user'] = $member; 
-         redirect('member');
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['user'] = $member; 
+        redirect('member');
       }
 
     }
