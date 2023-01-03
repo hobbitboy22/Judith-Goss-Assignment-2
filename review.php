@@ -5,8 +5,6 @@
 <?php
 
     if(isset($_SESSION['loggedIn']) == true){
-        echo "Logged in";
-        $name = htmlspecialchars($_SESSION['user']);
         echo "Welcome " . $_SESSION['user']['firstname'];
     }
     else{
