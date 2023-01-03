@@ -1,5 +1,5 @@
 <?php
-    class Image
+    class ImageProcessor
     {
         public static function upload($image, $directory = "/uploads") : string
         {
