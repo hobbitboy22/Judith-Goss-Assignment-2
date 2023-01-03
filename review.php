@@ -2,6 +2,8 @@
 <?php session_start() ?>
 <?php require __DIR__ . "/components/review-form.php"; ?>
 
+<style><?php include "css/StyleSheet" ?></style>
+
 <?php
 
     if(isset($_SESSION['loggedIn']) == true){
@@ -10,7 +12,7 @@
     else{
         echo "Please log in to write a review"; 
         echo ('<form action = "./login.php">
-            <input type = "submit" value = "Login"/>
+            <input type = "submit" class = "button" id = "reviewbutton" value = "Login"/>
         </form>');
     }
 
