@@ -1,25 +1,33 @@
 <?php
     class ImageProcessor
     {
-        public static function upload($image, $directory = "/uploads") : string
+        public static function upload($image, $directory = "/uploads", $sizelimit = 1000000, $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']) : string
         {
-            // Get the file extension of the original filename
-            $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
 
-            // Generate a unique string to use as the base for the new filename
-            $uniqueString = uniqid();
+            //Validate the file type
+            if (exif_imagetype($image['tmp_name'] === false)){
+                throw new Exception("The file is not an image");
+            }
 
-            // Return the new, unique filename by combining the unique string and file extension
-            $filename = $uniqueString . '.' . $ext;
+            //validate the file size
+            if(getimagesize($image) > $sizelimit){
+                throw new Exception("The file is too large");
+            }
 
-            // Create the full path to the destination directory
+            //Validate the extension type
+            $ext = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($ext, $allowedExtensions)){
+                throw new Exception("File type not allowed");
+            }
+
+            $filename = uniqid() . $ext;
+
             $destination = $directory . '/' . $filename;
 
-        // Move the uploaded image to the destination directory
             move_uploaded_file($image['tmp_name'], $destination);
 
-        // Return the new, unique filename of the uploaded image
-            return $filename;
+            return $destination;
         }
     }
 ?>
