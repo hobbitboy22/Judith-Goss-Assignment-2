@@ -6,8 +6,8 @@ $message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    $name = InputProcessor::processEmail($_POST['name'] ?? '');
-    $description = InputProcessor::processPassword($_POST['description'] ?? '');
+    $name = InputProcessor::processString($_POST['name'] ?? '');
+    $description = InputProcessor::processString($_POST['description'] ?? '');
     $price = InputProcessor::processString($_POST['price'] ?? '');
     $image = InputProcessor::processFile($_FILES['image'] ?? '');
 
@@ -44,22 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <h3 class="mb-2">Upload Image</h3>
               <div class="form-outline mb-4">
                 <input required type="text" id="Name" name="Name" class="form-control form-control-lg" placeholder="Name" value="<?= htmlspecialchars($fname['value'] ?? '') ?>"/>
-                <small class="text-danger"><?= htmlspecialchars($fname['error'] ?? '') ?></small>
+                <small class="text-danger"><?= htmlspecialchars($name['error'] ?? '') ?></small>
               </div>
 
               <div class="form-outline mb-4">
                 <input required type="text" id="Description" name="Description" class="form-control form-control-lg" placeholder="Description" value="<?= htmlspecialchars($sname['value'] ?? '') ?>"/>
-                <small class="text-danger"><?= htmlspecialchars($sname['error'] ?? '') ?></small>
+                <small class="text-danger"><?= htmlspecialchars($description['error'] ?? '') ?></small>
               </div>
-
 
               <div class="form-outline mb-4">
                 <input required type="number" id="Price" name="Price" class="form-control form-control-lg" placeholder="Price" value="<?= htmlspecialchars($email['value']?? '') ?>" />
-                <small class="text-danger"><?= htmlspecialchars($email['error'] ?? '') ?></small>
+                <small class="text-danger"><?= htmlspecialchars($price['error'] ?? '') ?></small>
               </div>
 
               <div class="form-outline mb-4">
                 <input required type="file" id="Image" name="Image" class="form-control form-control-lg" placeholder="Image" />
+                <small class="text-danger"><?= htmlspecialchars($image['error'] ?? '') ?></small>
               </div>
 
               <button class="btn btn-primary btn-lg w-100 mb-4" type="submit">Upload</button>
