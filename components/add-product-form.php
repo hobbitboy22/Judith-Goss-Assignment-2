@@ -11,17 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $price = InputProcessor::processString($_POST['price'] ?? '');
     $image = InputProcessor::processFile($_FILES['image'] ?? '');
 
-    $valid = $email['valid'] && $password['valid'];
+    $valid = $name['valid'] && $description['valid'] && $price['valid'] && $image['valid'];
 
     if ($valid) {
-  
-        $member = $controllers->members()->login_member($email['value'], $password['value']);
 
-    if (!$member) {
-        $message = "User details are incorrect.";
-     } else {
-        redirect('member');
-      }
+      $new_prod = ['name' => $name['value'], 'description' => $description['value'], 'price' => $price['value'], 'image' => $image['value']];
+      $product = $controllers->products()->create_product($new_prod);
+
+    if (!$product) {
+      $message = "Product detail are incorrect.";
+    } else {
+      redirect('add-product');
+    }
 
     }
     else {
