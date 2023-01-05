@@ -2,7 +2,7 @@
 
 require_once "./inc/functions.php";
 
-
+$message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {

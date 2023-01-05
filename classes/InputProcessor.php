@@ -60,7 +60,7 @@ class InputProcessor {
 
     }
 
-    public static function processFile(array $file): array{
+    public static function processFile(string $file): array{
         if(empty($file)){
             return self::returnInput(false, "File is empty");
         }
