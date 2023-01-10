@@ -1,7 +1,7 @@
 <?php
     class ImageProcessor
     {
-        public static function upload($image, $directory = "/uploads", $sizelimit = 1000000, $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']) : string
+        public static function upload($image, $directory = "./uploads", $sizelimit = 1000000, $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']) : string
         {
 
             //Validate the file type

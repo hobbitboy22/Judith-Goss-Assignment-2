@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $name = InputProcessor::processString($_POST['name'] ?? '');
     $description = InputProcessor::processString($_POST['description'] ?? '');
     $price = InputProcessor::processString($_POST['price'] ?? '');
-    $image = InputProcessor::processFile($_FILES['image'] ?? '');
+    $image = ImageProcessor::upload($_FILES['image'] ?? '');
 
     $valid = $name['valid'] && $description['valid'] && $price['valid'] && $image['valid'];
 
