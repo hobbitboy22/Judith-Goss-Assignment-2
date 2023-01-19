@@ -38,6 +38,15 @@ class InputProcessor {
                
     }
 
+    public static function processFile(array $file) : array {
+
+        if (empty($file)) {
+            return self::returnInput(false, "File is empty.");
+        }
+        return self::returnInput(true, $file['name']);
+
+    }
+
     public static function processPassword(string $password, string $password_v = null) {
 
         if (!empty($password_v)) {
@@ -58,13 +67,6 @@ class InputProcessor {
             return self::returnInput('Password must have a minimum of 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character', false);
         }
 
-    }
-
-    public static function processFile(string $file): array{
-        if(empty($file)){
-            return self::returnInput(false, "File is empty");
-        }
-        return self::returnInput(true, $file['name']);
     }
  
     private static function returnInput(string $value, bool $isValid) : array {

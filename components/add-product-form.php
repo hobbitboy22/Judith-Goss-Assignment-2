@@ -6,17 +6,23 @@ $message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    $name = InputProcessor::processString($_POST['name'] ?? '');
-    $description = InputProcessor::processString($_POST['description'] ?? '');
-    $price = InputProcessor::processString($_POST['price'] ?? '');
-    $image = ImageProcessor::upload($_FILES['image'] ?? '');
+    $name = InputProcessor::processString($_POST['Name'] ?? '');
+    $description = InputProcessor::processString($_POST['Description'] ?? '');
+    $price = InputProcessor::processString($_POST['Price'] ?? '');
+    $image = InputProcessor::processFile($_FILES['Image'] ?? '');
 
     $valid = $name['valid'] && $description['valid'] && $price['valid'] && $image['valid'];
 
     if ($valid) {
+      
+      $image['value'] = ImageProcessor::upload($_FILES['Image'] ?? '');
 
-      $new_prod = ['name' => $name['value'], 'description' => $description['value'], 'price' => $price['value'], 'image' => $image['value']];
-      $product = $controllers->products()->create_product($new_prod);
+      $args = ['name' => $name['value'],
+              'description' => $description['value'],
+              'price' => $price['value'],
+              'image' => $image['value']];
+
+      $product = $controllers->products()->create_product($args);
 
     if (!$product) {
       $message = "Product detail are incorrect.";
@@ -33,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 
 
-<form method="post" action=" <?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+<form method="post" action=" <?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" enctype="multipart/form-data">
   <section class="vh-100">
     <div class="container py-5 h-75">
       <div class="row d-flex justify-content-center align-items-center h-100">

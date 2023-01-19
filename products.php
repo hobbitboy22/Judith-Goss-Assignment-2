@@ -1,40 +1,13 @@
-<?php require __DIR__ . "/inc/header.php"; ?>
-<?php session_start(); ?>
-<?php require "./inc/functions.php"; ?>
-
-<style><?php include "css/StyleSheet" ?></style>
-
 <h1>Products!</h1>
 
-<?php
+<?php require __DIR__ . "/inc/header.php"; ?>
 
-   $products = $member = $controllers->products()->get_all_products(); ?>
-   
-<table>
-   <tr>
-   <?php foreach ($products as $product){ ?>
-      <td>
-         <div class="container text-center">
-            <div class="row align-items-start">
-
-               <div class="col-3" >
-                  <div class = "row">
-                     <p id = "productshow"><?= $product['name'] ?></p>
-                  </div>
-                  <div class = "row">
-                     <p id = "productshow"><?= $product['price'] ?></p>
-                  </div>
-                  <div class = "row">
-                     <p id = "productshow"><?= $product['description'] ?></p>
-                  </div>
-               </div>
-
-            </div>
-         </td>
+<section class="vh-100 text-center">
+    <div class="container py-5 h-75">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+      <?php require __DIR__ . "/components/product-details.php"; ?>
       </div>
-   <?php } ?>
-   </tr>
-</table>
-
+    </div>
+</section>
 
 <?php require __DIR__ . "/inc/footer.php"; ?>

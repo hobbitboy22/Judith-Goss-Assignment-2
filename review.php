@@ -1,5 +1,4 @@
 <?php require __DIR__ . "/inc/header.php"; ?>
-<?php session_start() ?>
 <?php require __DIR__ . "/components/review-form.php"; ?>
 
 <style><?php include "css/StyleSheet" ?></style>
