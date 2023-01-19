@@ -18,10 +18,11 @@
     if ($valid)
     {
 
-      $args = ['firstname' => $fname['value'],
+      $args = ['review' => $fname['value'],
                'lastname' => $sname['value'],
                'email' => $email['value'],
-               'password' => password_hash($password['value'], PASSWORD_DEFAULT)];
+               'password' => password_hash($password['value'], PASSWORD_DEFAULT),
+               'accountType' => 'user'];
 
       $member = $controllers->members()->register_member($args);
       if ($member) {
@@ -34,6 +35,7 @@
 
   }
 ?>
+
 <form method="post" action=" <?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
   <section class="vh-100">
     <div class="container py-5 h-75">
